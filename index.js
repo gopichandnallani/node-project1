@@ -1,7 +1,6 @@
 var express = require("express");
 var app = express();
 var bodyParser = require('body-parser');
-var db = require("../Node-project-1/db/db")
 
 app.use(bodyParser.json());
 
