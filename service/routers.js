@@ -2,6 +2,17 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db/db")
 
+router.get("/:id", (req, res) => {
+  var _id = req.params.id
+  db.query(`SELECT * FROM customers WHERE id = ${_id}`, (err, rows, fields) => {
+    if (!err){
+      res.json(rows);
+    }
+    else
+    console.log(err);
+  })
+});
+
 router.get("/", (req, res) => {
     db.query(`SELECT * FROM customers `, (err, rows, fields) => {
       if (!err){
@@ -28,7 +39,7 @@ router.post("/", (req, res) => {
     });
   })
 
-router.put("/url/:id", (req, res) => {
+router.put("/:id", (req, res) => {
     let _id = req.params.id;
     const payload = {
       name: req.body.name,
@@ -43,6 +54,18 @@ router.put("/url/:id", (req, res) => {
       }
     });
   })
+
+router.delete("/:id", (req,res) => {
+  var _id= req.params.id;
+  db.query(`DELETE FROM customers WHERE  id = ${_id}`, (err, rows, result, fields) => {
+    if (!err) {
+      res.json(rows);
+    }
+    else {
+      console.log(err);
+    }
+  });
+})
 
 
 module.exports = router;

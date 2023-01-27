@@ -11,5 +11,5 @@ app.listen(PORT, (req, res) => {
 
 const schema = require("./service/routers");
 
-app.use("/url", schema);
+app.use("/", schema);
 
