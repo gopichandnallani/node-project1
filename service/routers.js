@@ -26,10 +26,12 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
     console.log("post api called");
     const payload = {
-      name: req.body.name,
-      address: req.body.address
+      LastName: req.body.lastname,
+      FirstName: req.body.firstname,
+      Address: req.body.address,
+      City: req.body.city
     };
-    db.query(`INSERT INTO customers (name, address) VALUES ("${payload.name}", "${payload.address}")`, (err, rows, fields) => {
+    db.query(`INSERT INTO customers (LastName, FirstName, Address, City) VALUES ("${payload.LastName}", "${payload.FirstName}", "${payload.Address}", "${payload.City}")`, (err, rows, fields) => {
       if (!err) {
         return res.json(rows);
       }
@@ -42,10 +44,12 @@ router.post("/", (req, res) => {
 router.put("/:id", (req, res) => {
     let _id = req.params.id;
     const payload = {
-      name: req.body.name,
-      address: req.body.address
+      LastName: req.body.lastname,
+      FirstName: req.body.firstname,
+      Address: req.body.address,
+      City: req.body.city
     };
-    db.query(`UPDATE customers SET name = "${payload.name}" , address = "${payload.address}" WHERE id = "${_id}"`, (err, rows, fields) => {
+    db.query(`UPDATE customers SET LastName = "${payload.LastName}" , FirstName = "${payload.FirstName}", Address = "${payload.Address}", City = "${payload.City}" WHERE id = "${_id}"`, (err, rows, fields) => {
       if (!err) {
         res.json(rows);
       }
