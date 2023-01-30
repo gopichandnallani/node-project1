@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db/db")
+const db = require("../db/db");
+
+const multer = require("multer");
+const upload = multer({dest: 'uploads/'}).single("image");
+
 
 router.get("/:id", (req, res) => {
   var _id = req.params.id
@@ -21,6 +25,15 @@ router.get("/", (req, res) => {
       else
       console.log(err);
     })
+});
+
+router.post("/image", (req, res) => {
+  upload(req, res, (err) => {
+    if(err) {
+      res.status(400).send("Something went wrong!");
+    }
+    res.send(req.file);
+  });
 });
 
 router.post("/", (req, res) => {
